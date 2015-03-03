@@ -12,6 +12,7 @@ test/dummy/.sass-cache
 # Mac finder artifacts
 .DS_Store
 */.DS_Store
+*/*/.DS_Store
 
 # Netbeans project directory
 /nbproject/
