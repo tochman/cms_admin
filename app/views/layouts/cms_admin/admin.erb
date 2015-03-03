@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <%= stylesheet_link_tag 'admin' %>
+  <%= javascript_include_tag 'application'%>
+  <%= tinymce_assets %>
+  <%= yield(:js) if content_for?(:js) %>
+  <title>Central Hall - CMS</title>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header header-fixed navbar">
+
+    <div class="brand">
+      <!-- toggle offscreen menu -->
+      <a href="javascript:;" class="ti-menu off-left visible-xs" data-toggle="offscreen" data-move="ltr"></a>
+      <!-- /toggle offscreen menu -->
+
+      <!-- logo -->
+      <a href="<%= main_app.root_path %>" class="navbar-brand">
+        <%= image_tag "nav_logo.png" %>
+        <span class="heading-font">Central Hall</span>
+      </a>
+      <!-- /logo -->
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li class="hidden-xs">
+        <!-- toggle small menu -->
+        <a href="javascript:;" class="toggle-sidebar">
+          <i class="ti-menu"></i>
+        </a>
+        <!-- /toggle small menu -->
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li class="off-right">
+        <a href="javascript:;" data-toggle="dropdown">
+          <%= image_tag "faceless.jpg", :class => "header-avatar img-circle" %>
+          <span class="hidden-xs ml10"><%= current_user.name.present? ? current_user.name : current_user.email %></span>
+          <i class="ti-angle-down ti-caret hidden-xs"></i>
+        </a>
+        <ul class="dropdown-menu animated fadeInRight">
+          <li><%= link_to 'Account', self.edit_user_path(current_user), remote: true %></a></li>
+          <li><%= link_to 'Logout', self.destroy_user_session_path, method: :delete, remote: true %></li>
+        </ul>
+      </li>
+    </ul>
+  </header>
+  <!-- /top header -->
+
+  <section class="layout">
+    <!-- sidebar menu -->
+
+    <aside class="sidebar offscreen-left">
+      <!-- main navigation -->
+
+      <nav class="main-navigation" data-distance="0" data-height="auto" data-rail-visible="true" data-size="6px" data-wheel-step="10">
+        <p class="nav-title">MENU</p>
+
+        <ul class="nav">
+          <%# binding.pry %>
+          <%= nav_link_to self.root_path, remote: true do %>
+              <i class="toggle-accordion"></i> <i class="ti-home"></i><span>Dashboard</span>
+          <% end %>
+
+          <%= nav_link_to self.events_path, remote: true do %>
+              <i class="toggle-accordion"></i> <i class="ti-calendar"></i><span>Events</span>
+          <% end %>
+
+          <%= nav_link_to self.news_index_path, remote: true do %>
+              <i class="toggle-accordion"></i> <i class="ti-desktop"></i><span>News</span>
+          <% end %>
+        </ul>
+
+      </nav>
+    </aside>
+    <!-- /sidebar menu -->
+    <section class="main-content">
+      <!-- content wrapper -->
+      <div class="content-wrap">
+        <div class="wrapper">
+          <div class="row">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      <!-- /content wrapper -->
+      <a class="exit-offscreen"></a>
+    </section><!-- /main content -->
+
+
+
+  </section>
+</div>
+<script>
+
+    $(document).ready(function () {
+        // Flash alert fade
+        var flash = $('#flash');
+        if (flash.length > 0) {
+            window.setTimeout(function () {
+                flash.fadeTo(500, 0).slideUp(500, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    });
+</script>
+</body>
+</html>
