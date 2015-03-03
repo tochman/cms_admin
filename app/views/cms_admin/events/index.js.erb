@@ -1,0 +1,6 @@
+if ($('#event-view').length) {
+    $("#event-view").html('<%=j render partial: 'index' %>');
+} else {
+    $( ".content-wrap .wrapper .row" ).html("<div id='event-view'></div>");
+    $("#event-view").html('<%=j render partial: 'index' %>');
+}

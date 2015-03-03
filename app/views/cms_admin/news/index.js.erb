@@ -1,0 +1,6 @@
+if ($('#news-view').length) {
+    $("#news-view").html('<%=j render partial: 'index' %>');
+} else {
+    $( ".content-wrap .wrapper .row" ).html("<div id='news-view'></div>");
+    $("#news-view").html('<%=j render partial: 'index' %>');
+}

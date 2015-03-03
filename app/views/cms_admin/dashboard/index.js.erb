@@ -1,0 +1,6 @@
+if ($('#dashboard-view').length) {
+    $("#dashboard-view").html('<%=j render partial: 'index' %>');
+} else {
+    $( ".content-wrap .wrapper .row" ).html("<div id='dashboard-view'></div>");
+    $("#dashboard-view").html('<%=j render partial: 'index' %>');
+}

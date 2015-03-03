@@ -1,0 +1,61 @@
+.bundle/
+log/*.log
+pkg/
+test/dummy/db/*.sqlite3
+test/dummy/db/*.sqlite3-journal
+test/dummy/log/*.log
+test/dummy/tmp/
+test/dummy/.sass-cache
+
+
+
+# Mac finder artifacts
+.DS_Store
+*/.DS_Store
+
+# Netbeans project directory
+/nbproject/
+
+# RubyMine project files
+.idea
+/.idea/*
+
+# Textmate project files
+/*.tmproj
+
+# vim artifacts
+**.swp
+
+# Ignore application configuration
+#/config/application.yml
+.env
+
+# Versioning
+.rvmrc.env
+
+.rvmrc
+.ruby-version
+.ruby-gemset
+
+# Ignore Precompiled Assets
+public/assets/**
+
+# Plugin files
+.floo
+.flooignore
+
+# Zeus config
+zeus.json
+
+#.pryrc
+#vendor/*
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+#
+
+# Ignore logs
+log/*
+
+

@@ -1,0 +1,57 @@
+<%= tinymce %>
+<%= bootstrap_form_for [:admin, @event], multipart: true, remote: true do |f| %>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <%= f.date_field :start_date, label: 'Start date' %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.date_field :end_date, label: 'End date' %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.file_field :hero_image, label: 'Image' %>
+      </div>
+    </div>
+    <% if @event.hero_image? %>
+        <div class="row">
+          <div class="col-sm-4">
+            <%= image_tag @event.hero_image.url(:thumb) %>
+          </div>
+        </div>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.url_field :resource_url %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-11">
+        <%= f.text_area :body, rows: 20, cols: 120 %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <%= f.submit 'Save', class: 'btn btn-default', remote: true %>
+        <%= link_to 'Cancel', admin_events_path, class: 'btn btn-default', remote: true %>
+      </div>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        tinymce.remove();
+        tinymce.init({
+            selector: '#news_body',
+            toolbar: ["styleselect | bold italic | undo redo | alignleft aligncenter alignright"],
+            plugins: "image,link"
+        });
+    });
+</script>

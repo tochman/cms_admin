@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    Welcome back <%= current_user.display_name %>
+  </div>
+  <div class="row">
+    <dic class="col-sm-12">
+      <h2>Statistics</h2>
+    </dic>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Events</h3>
+
+      <p>There are <%= stats[:events] %> events published</p>
+      <% if most_viewed_events %>
+          <h4>Top events</h4>
+          <%= most_viewed_events %>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <h3>News</h3>
+
+      <p>There are <%= stats[:news] %> newsitems published</p>
+      <% if most_viewed_news %>
+          <h4>Top newsitems</h4>
+          <%= most_viewed_news %>
+      <% end %>
+    </div>
+
+    <div class="col-sm-4">
+      <h3>Pages</h3>
+      <%= page_views %>
+    </div>
+  </div>
+
+</div>

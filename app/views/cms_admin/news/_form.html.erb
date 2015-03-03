@@ -1,0 +1,46 @@
+<%= bootstrap_form_for [:admin, @news], multipart: true, remote: true do |f| %>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.text_field :title %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.file_field :hero_image, label: 'Image' %>
+      </div>
+    </div>
+    <% if @news.hero_image? %>
+        <div class="row">
+          <div class="col-sm-4">
+            <%= image_tag @news.hero_image.url(:thumb) %>
+          </div>
+        </div>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-11">
+        <%= f.text_area :body, class: 'tinymce', rows: 20, cols: 120 %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <%= f.submit 'Save', class: 'btn btn-default', remote: true %>
+        <%= link_to 'Cancel', admin_news_index_path, class: 'btn btn-default', remote: true %>
+      </div>
+    </div>
+<% end %>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        tinymce.remove();
+        tinymce.init({
+            selector: '#news_body',
+            toolbar: ["styleselect | bold italic | undo redo","image | link"],
+            plugins: "image,link"
+        });
+    });
+</script>
+
+
+
