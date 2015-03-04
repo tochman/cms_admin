@@ -7,6 +7,7 @@ module CmsAdmin
     layout false, only: [:new, :edit, :destroy, :update, :index]
 
     def index
+      request_response(:index)
     end
 
     def new
@@ -28,7 +29,7 @@ module CmsAdmin
       @news = News.friendly.find(params[:id])
       @news.update_attributes(news_params)
       flash.now[:notice] = 'News item Updated'
-      render action: :index, layout: 'admin'
+      request_response(:index)
     end
 
     def create
@@ -56,6 +57,11 @@ module CmsAdmin
       params.require(:news).permit(:title, :body, :user_id, :hero_image)
     end
 
-
+    def request_response(action)
+      respond_to do |format|
+        format.js { render action: action, layout: false }
+        format.html { render action, layout: 'cms_admin/admin' }
+      end
+    end
   end
 end

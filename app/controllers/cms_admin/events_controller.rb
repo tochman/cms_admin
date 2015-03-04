@@ -4,13 +4,10 @@ module CmsAdmin
     before_action :get_events
 
     respond_to :js, :json, :html
-    layout false, only: [:new, :edit, :destroy, :update, :index]
+    #layout false, only: [:new, :edit, :destroy, :update, :index]
 
     def index
-      respond_to do |format|
-        format.js { render action: :index, layout: false }
-        format.html { render :index, layout: 'admin' }
-      end
+      request_response(:index)
     end
 
     def new
@@ -21,7 +18,7 @@ module CmsAdmin
       @event = Event.friendly.find(params[:id])
       @event.destroy
       flash.now[:notice] = 'Event Deleted'
-      render action: :index
+      request_response(:index)
     end
 
     def edit
@@ -32,7 +29,7 @@ module CmsAdmin
       @event = Event.friendly.find(params[:id])
       @event.update_attributes(event_params)
       flash.now[:notice] = 'Event Updated'
-      render action: :index, layout: 'admin'
+      request_response(:index)
     end
 
     def create
@@ -40,13 +37,10 @@ module CmsAdmin
       @event.user = current_user
       if @event.save
         flash.now[:notice] = 'Event created'
-        render action: :index
+        request_response(:index)
       else
         flash.now[:error] = @event.errors.full_messages
-        respond_to do |format|
-          format.js { render action: :new, layout: false }
-          format.html { render :new }
-        end
+        request_response(:new)
       end
 
     end
@@ -60,6 +54,13 @@ module CmsAdmin
 
     def event_params
       params.require(:event).permit(:title, :body, :user_id, :hero_image, :start_date, :end_date, :resource_url)
+    end
+
+    def request_response(action)
+      respond_to do |format|
+        format.js { render action: action, layout: false }
+        format.html { render action, layout: 'cms_admin/admin' }
+      end
     end
   end
 end

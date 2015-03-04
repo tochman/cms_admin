@@ -1,5 +1,5 @@
 <h2>Events</h2>
-<div class="pull-right"><%= link_to 'Create Event', new_admin_event_path, class: 'btn btn-success', remote: true, turbolinks: false %></div>
+<div class="pull-right"><%= link_to 'Create Event', new_event_path, class: 'btn btn-success', remote: true, turbolinks: false %></div>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -19,8 +19,8 @@
         <td><%= event.created_at.strftime('%d/%m/%Y') %></td>
         <td><%= event.start_date.strftime('%d/%m/%Y') %></td>
         <td>
-          <%= link_to 'Edit', edit_admin_event_path(event), class: 'btn btn-default btn-xs', remote: true %> |
-          <%= link_to 'Delete', admin_event_path(event), class: 'btn btn-danger btn-xs', remote: true, data: {confirm: 'Are you sure you want to delete this event?'}, method: :delete %>
+          <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-default btn-xs', remote: true %> |
+          <%= link_to 'Delete', event_path(event), class: 'btn btn-danger btn-xs', remote: true, data: {confirm: 'Are you sure you want to delete this event?'}, method: :delete %>
         </td>
       </tr>
   <% end %>
