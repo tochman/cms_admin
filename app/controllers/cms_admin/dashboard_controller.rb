@@ -1,6 +1,6 @@
 module CmsAdmin
   class DashboardController < ::ApplicationController
-   layout 'cms_admin/admin'
+    layout 'cms_admin/admin'
 
     def index
       respond_to do |format|
@@ -8,7 +8,9 @@ module CmsAdmin
         format.html { render :index, layout: 'cms_admin/admin' }
       end
     end
+
     private
+
   end
 end
 
