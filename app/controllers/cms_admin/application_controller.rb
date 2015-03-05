@@ -1,10 +1,9 @@
 module CmsAdmin
-  class ApplicationController < ActionController::Base
-    include CmsAdmin::ErrorHandler
+  class ApplicationController < ::ApplicationController
+    include CmsAdmin
+
+    public
 
 
-    def logger
-      render_404
-    end
   end
 end

@@ -7,7 +7,7 @@ class News < ActiveRecord::Base
   friendly_id :title, use: :slugged
 
   def body
-    ActionController::Base.helpers.strip_tags(self[:body].html_safe) if self[:body]
+    self[:body].html_safe if self[:body]
   end
 
 end

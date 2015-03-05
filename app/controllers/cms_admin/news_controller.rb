@@ -1,7 +1,11 @@
+require_dependency 'cms_admin/application_controller'
 module CmsAdmin
   class NewsController < ::ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :get_news
+
+    include CmsAdmin::ResponseRenderer
+
 
     respond_to :js, :json, :html
     layout false, only: [:new, :edit, :destroy, :update, :index]
@@ -18,7 +22,7 @@ module CmsAdmin
       @news = News.friendly.find(params[:id])
       @news.destroy
       flash.now[:notice] = 'News item Deleted'
-      render action: :index
+      request_response(:index)
     end
 
     def edit
@@ -37,13 +41,10 @@ module CmsAdmin
       @news.user = current_user
       if @news.save
         flash.now[:notice] = 'News item created'
-        render action: :index
+        request_response(:index)
       else
         flash.now[:error] = @news.errors.full_messages
-        respond_to do |format|
-          format.js { render action: :new, layout: false }
-          format.html { render :new }
-        end
+        request_response(:new)
       end
     end
 
@@ -57,11 +58,5 @@ module CmsAdmin
       params.require(:news).permit(:title, :body, :user_id, :hero_image)
     end
 
-    def request_response(action)
-      respond_to do |format|
-        format.js { render action: action, layout: false }
-        format.html { render action, layout: 'cms_admin/admin' }
-      end
-    end
   end
 end

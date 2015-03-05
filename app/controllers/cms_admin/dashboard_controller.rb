@@ -1,12 +1,13 @@
+require_dependency 'cms_admin/application_controller'
+
 module CmsAdmin
   class DashboardController < ::ApplicationController
     layout 'cms_admin/admin'
 
+    include CmsAdmin::ResponseRenderer
+
     def index
-      respond_to do |format|
-        format.js { render action: :index, layout: false }
-        format.html { render :index, layout: 'cms_admin/admin' }
-      end
+      request_response(:index)
     end
 
     private

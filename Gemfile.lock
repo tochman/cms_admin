@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cms_admin (0.0.1.pre.alpha2)
+    cms_admin (0.0.1.pre.alpha3)
       pg
       rails (~> 4.2.0)
 

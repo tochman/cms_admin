@@ -4,4 +4,6 @@ CmsAdmin::Engine.routes.draw do
   resources :events
   resources :news
   resources :users
+  #get '*not_found', to: 'application#render_404'
+  #get '*not_found', to: 'errors#error_404'
 end

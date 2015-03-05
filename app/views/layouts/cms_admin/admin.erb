@@ -68,15 +68,15 @@
 
         <ul class="nav">
           <%# binding.pry %>
-          <%= nav_link_to self.root_path, remote: true do %>
+          <%= nav_link_to self.root_path, 'dashboard', remote: true do %>
               <i class="toggle-accordion"></i> <i class="ti-home"></i><span>Dashboard</span>
           <% end %>
 
-          <%= nav_link_to self.events_path, remote: true do %>
+          <%= nav_link_to self.events_path, 'events', remote: true do %>
               <i class="toggle-accordion"></i> <i class="ti-calendar"></i><span>Events</span>
           <% end %>
 
-          <%= nav_link_to self.news_index_path, remote: true do %>
+          <%= nav_link_to self.news_index_path, 'news', remote: true do %>
               <i class="toggle-accordion"></i> <i class="ti-desktop"></i><span>News</span>
           <% end %>
         </ul>

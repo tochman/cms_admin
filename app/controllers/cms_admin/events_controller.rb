@@ -1,7 +1,10 @@
+require_dependency 'cms_admin/application_controller'
 module CmsAdmin
   class EventsController < ::ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :get_events
+
+    include CmsAdmin::ResponseRenderer
 
     respond_to :js, :json, :html
     #layout false, only: [:new, :edit, :destroy, :update, :index]
@@ -56,12 +59,6 @@ module CmsAdmin
       params.require(:event).permit(:title, :body, :user_id, :hero_image, :start_date, :end_date, :resource_url)
     end
 
-    def request_response(action)
-      respond_to do |format|
-        format.js { render action: action, layout: false }
-        format.html { render action, layout: 'cms_admin/admin' }
-      end
-    end
   end
 end
 
