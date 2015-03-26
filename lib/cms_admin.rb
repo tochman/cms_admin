@@ -1,5 +1,6 @@
 require 'cms_admin/engine'
 
+
 module CmsAdmin
   module ErrorHandler
     extend ActiveSupport::Concern
